@@ -34,4 +34,24 @@ export function uniqueName() {
     return uniqueNamesGenerator(uniqueNamesConfig) + "-" + randomInt(100, 999);
 }
 
+/*
+    Hàm đẩy sự kiện vào Google Tag Manager Data Layer.
+    Cần đảm bảo file app/layout.jsx đã setup Google Tag Manager.
+*/
+export function executeRentalBtnGATag(obj) {
+    if (typeof window !== 'undefined' && window.dataLayer) {
+        window.dataLayer.push({
+            'event': obj.event,
+            'category': obj.category,
+            'genre_large': obj.genre_large,
+            'genre_mid': obj.genre_mid,
+            'genre_min': obj.genre_min,
+            'titleid': obj.titleid
+        });
+        console.log('DataLayer Push Executed:', obj);
+    } else {
+        console.warn('DataLayer is not available.');
+    }
+}
+
 export const uploadDisabled = process.env.NEXT_PUBLIC_DISABLE_UPLOADS?.toLowerCase() === "true";
