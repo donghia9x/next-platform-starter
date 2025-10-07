@@ -1,14 +1,8 @@
 'use client';
 
 import { Card } from 'components/card';
-import { executeRentalBtnGATag, randomInt } from 'utils'; // Import randomInt
+import { executeRentalBtnGATag, randomInt, GENRE_LARGE, GENRE_MID, CATEGORY } from 'utils'; 
 import { useState } from 'react';
-
-// Danh sách các giá trị ngẫu nhiên
-const GENRE_LARGE = ['Film', 'Series', 'Documentary', 'Anime'];
-const GENRE_MID = ['Action', 'Comedy', 'Horror', 'Romance', 'Sci-Fi'];
-const CATEGORY = ['UI_Interaction', 'Deep_Conversion'];
-
 
 // Hàm lấy giá trị ngẫu nhiên từ một mảng
 const getRandomValue = (arr) => arr[randomInt(0, arr.length - 1)];
