@@ -3,12 +3,19 @@ import { uniqueNamesGenerator, adjectives, animals, NumberDictionary } from 'uni
 /* Hardcoded user database for simple authentication */
 const USERS = [
     { id: 'user123', username: 'testuser', password: 'password', method: 'standard' },
+    { id: 'user001', username: 'testuser1', password: 'password', method: 'standard' },
+    { id: 'user002', username: 'testuser2', password: 'password', method: 'standard' },
     { id: 'admin001', username: 'admin', password: 'adminpassword', method: 'standard' },
 ];
 
 /* Keys for storing session data in sessionStorage */
 const AUTH_KEY = 'user-session';
 const GA_TRACKED_KEY = 'ga-login-tracked'; // Key để theo dõi xem sự kiện login đã được gửi trong phiên này chưa
+
+/* Constants for Search/Rental Events */
+export const GENRE_LARGE = ['Film', 'Series', 'Documentary', 'Anime'];
+export const GENRE_MID = ['Action', 'Comedy', 'Horror', 'Romance', 'Sci-Fi'];
+export const CATEGORY = ['UI_Interaction', 'Deep_Conversion'];
 
 // ------------------- GA TAGGING UTILITIES -------------------
 
@@ -68,6 +75,20 @@ export function executeLogoutGATag() {
         console.log('DataLayer Push (Logout) Executed.');
     } else {
         console.warn('DataLayer is not available for Logout event.');
+    }
+}
+
+// Search event
+export function executeSearchGATag({ searchTerm, category }) {
+    if (typeof window !== 'undefined' && window.dataLayer) {
+        window.dataLayer.push({
+            'event': 'search',
+            'search_term': searchTerm,
+            'category': category, // Param trùng tên để test scope
+        });
+        console.log('DataLayer Push (Search) Executed:', { searchTerm, category });
+    } else {
+        console.warn('DataLayer is not available for Search event.');
     }
 }
 
