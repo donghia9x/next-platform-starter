@@ -40,7 +40,7 @@ export function GATestButton() {
     return (
         <Card title="Kích hoạt Data Layer Event (Random)">
             <button className="btn btn-lg" onClick={handleButtonClick}>
-                Click để Gửi Data Layer Event Ngẫu nhiên
+                Thuê một đĩa ngẫu nhiên
             </button>
             {lastEvent && (
                 <div className="mt-4 p-4 bg-neutral-100 text-neutral-900 rounded-sm">
