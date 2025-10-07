@@ -46,7 +46,7 @@ export function executeLoginGATag({ method, userId }) {
             window.dataLayer.push({
                 'event': 'login',
                 'method': method,
-                'user_id': userId,
+                'uid': userId,
                 'test_custom_param': 'initialized'
             });
             // Đánh dấu rằng sự kiện đã được gửi
@@ -68,7 +68,7 @@ export function executeLogoutGATag() {
     if (typeof window !== 'undefined' && window.dataLayer) {
         window.dataLayer.push({
             'event': 'logout',
-            'user_id': null // Theo yêu cầu của bạn
+            'uid': null
         });
         // Xóa cờ theo dõi GA khi logout
         sessionStorage.removeItem(GA_TRACKED_KEY);
