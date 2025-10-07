@@ -72,7 +72,7 @@ export function SearchForm() {
                     <pre className="mt-2 text-sm whitespace-pre-wrap">
                         {JSON.stringify({ event: 'search', search_term: lastSearch.data.searchTerm, category: lastSearch.data.category }, null, 2)}
                     </pre>
-                    <p className="mt-2 text-sm italic">Kiểm tra GTM Preview Mode để thấy sự kiện 'search' được kích hoạt.</p>
+                    <p className="mt-2 text-sm italic">Kiểm tra GTM Preview Mode để thấy sự kiện &apos;search&apos; được kích hoạt.</p>
                 </div>
             )}
         </Card>
