@@ -23,7 +23,7 @@ const preGtmUserIdScript = `
             if (userId) {
                 window.dataLayer = window.dataLayer || [];
                 // Đẩy giá trị user_id lên Data Layer (không kèm event)
-                window.dataLayer.push({ 'user_id': userId });
+                window.dataLayer.push({ 'uid': userId });
             }
         } catch (e) {
             console.error('Error parsing user session for GA:', e);
