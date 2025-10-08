@@ -19,6 +19,16 @@ export const CATEGORY = ['UI_Interaction', 'Deep_Conversion'];
 
 // ------------------- GA TAGGING UTILITIES -------------------
 
+// Đặt giá trị User ID vào Data Layer (Không kèm event)
+function setUserIdInDatalayer(userId) {
+    if (typeof window !== 'undefined' && window.dataLayer) {
+        window.dataLayer.push({
+            'uid': userId
+        });
+        console.log('DataLayer Push (User ID Value Set):', userId);
+    }
+}
+
 /*
     Hàm đẩy sự kiện Data Layer cho Rental (đã tạo ở bước trước).
 */
@@ -46,7 +56,7 @@ export function executeLoginGATag({ method, userId }) {
             window.dataLayer.push({
                 'event': 'login',
                 'method': method,
-                'uid': userId,
+                // user_id ĐÃ BỊ LOẠI BỎ khỏi event payload
                 'test_custom_param': 'initialized'
             });
             // Đánh dấu rằng sự kiện đã được gửi
@@ -102,7 +112,15 @@ export function authenticateUser(username, password) {
 export function getCurrentUser() {
     if (typeof window === 'undefined') return null;
     const user = sessionStorage.getItem(AUTH_KEY);
-    return user ? JSON.parse(user) : null;
+    
+    // Đảm bảo User ID được set lại trên Data Layer sau khi reload
+    if (user) {
+        const parsedUser = JSON.parse(user);
+        setUserIdInDatalayer(parsedUser.id);
+        return parsedUser;
+    } else {
+        return null;
+    }
 }
 
 export function loginUser(user) {
