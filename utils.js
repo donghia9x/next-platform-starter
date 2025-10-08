@@ -126,7 +126,11 @@ export function getCurrentUser() {
 export function loginUser(user) {
     if (typeof window !== 'undefined') {
         sessionStorage.setItem(AUTH_KEY, JSON.stringify(user));
-        // Kích hoạt sự kiện GA ngay sau khi lưu session
+
+        // Đặt giá trị User ID (cho Configuration Tag)
+        setUserIdInDatalayer(user.id);
+        
+        // Kích hoạt sự kiện GA ngay sau khi lưu session (chỉ một lần)
         executeLoginGATag({ method: user.method, userId: user.id });
     }
 }
