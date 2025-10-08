@@ -5,6 +5,7 @@ const USERS = [
     { id: 'user123', username: 'testuser', password: 'password', method: 'standard' },
     { id: 'user001', username: 'testuser1', password: 'password', method: 'standard' },
     { id: 'user002', username: 'testuser2', password: 'password', method: 'standard' },
+    { id: 'user003', username: 'testuser3', password: 'password', method: 'standard' },
     { id: 'admin001', username: 'admin', password: 'adminpassword', method: 'standard' },
 ];
 
@@ -18,16 +19,6 @@ export const GENRE_MID = ['Action', 'Comedy', 'Horror', 'Romance', 'Sci-Fi'];
 export const CATEGORY = ['UI_Interaction', 'Deep_Conversion'];
 
 // ------------------- GA TAGGING UTILITIES -------------------
-
-// Đặt giá trị User ID vào Data Layer (Không kèm event)
-function setUserIdInDatalayer(userId) {
-    if (typeof window !== 'undefined' && window.dataLayer) {
-        window.dataLayer.push({
-            'uid': userId
-        });
-        console.log('DataLayer Push (User ID Value Set):', userId);
-    }
-}
 
 /*
     Hàm đẩy sự kiện Data Layer cho Rental (đã tạo ở bước trước).
@@ -109,18 +100,14 @@ export function authenticateUser(username, password) {
     return USERS.find(user => user.username === username && user.password === password);
 }
 
+// HÀM ĐÃ ĐƠN GIẢN HÓA
 export function getCurrentUser() {
     if (typeof window === 'undefined') return null;
     const user = sessionStorage.getItem(AUTH_KEY);
     
-    // Đảm bảo User ID được set lại trên Data Layer sau khi reload
-    if (user) {
-        const parsedUser = JSON.parse(user);
-        setUserIdInDatalayer(parsedUser.id);
-        return parsedUser;
-    } else {
-        return null;
-    }
+    // Logic đẩy ID đã chuyển lên app/layout.jsx để đảm bảo timing.
+    // Hàm này chỉ còn trả về user object.
+    return user ? JSON.parse(user) : null;
 }
 
 export function loginUser(user) {
