@@ -46,6 +46,9 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <head>
+                {/* SCRIPT ĐẨY USER ID (CHẠY TRƯỚC GTM) */}
+                <script dangerouslySetInnerHTML={{ __html: preGtmUserIdScript }} />
+                
                 {/* Google Tag Manager */}
                 <script dangerouslySetInnerHTML={{ __html: gtmScript }} />
                 {/* End Google Tag Manager */}
