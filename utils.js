@@ -47,7 +47,7 @@ export function executeLoginGATag({ method, userId }) {
             window.dataLayer.push({
                 'event': 'login',
                 'method': method,
-                'user_id': userId,
+                'uid': userId,
                 'test_custom_param': 'initialized'
             });
             // Đánh dấu rằng sự kiện đã được gửi
