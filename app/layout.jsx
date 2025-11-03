@@ -45,14 +45,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
-            <head>
-                {/* SCRIPT ĐẨY USER ID (CHẠY TRƯỚC GTM) */}
-                <script dangerouslySetInnerHTML={{ __html: preGtmUserIdScript }} />
-                
+            <head>                
                 {/* Google Tag Manager */}
                 <script dangerouslySetInnerHTML={{ __html: gtmScript }} />
                 {/* End Google Tag Manager */}
                 <link rel="icon" href="/favicon.svg" sizes="any" />
+
+                {/* THỬ ĐẨY USER ID VÀO SAU gtm SCRIPT - cần revert commit này sau */}
+                <script dangerouslySetInnerHTML={{ __html: preGtmUserIdScript }} />
             </head>
             <body className="antialiased text-white bg-blue-900">
                 {/* Google Tag Manager (noscript) */}
